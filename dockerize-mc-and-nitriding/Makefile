@@ -11,5 +11,5 @@ create-instance:
 	--instance-type m5.xlarge \
 	--key-name silver2 \
 	--enclave-options 'Enabled=true'
-install-go:
+setup-host:
 	sh setup-linux-host.sh

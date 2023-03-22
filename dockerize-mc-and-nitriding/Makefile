@@ -1,7 +1,7 @@
 build:
-	docker image build -t mc-and-nitriding:latest .
+	sudo docker image build -t mc-and-nitriding:latest .
 run:
-	docker run -it -p 25565:25565 mc-and-nitriding:latest
+	sudo docker run -it -p 25565:25565 mc-and-nitriding:latest
 
 create-instance:
 	# this ami for intel amazon linux 2

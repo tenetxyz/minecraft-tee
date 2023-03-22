@@ -2,7 +2,7 @@
 
 #nitriding_url="http://127.0.0.1:8080/enclave/ready"
 echo "[start.sh] Starting"
-sh /nitriding/cmd/nitriding -fqdn example.com  -extport 8443  -intport 8080 &
+sh /nitriding/main -fqdn example.com  -extport 8443  -intport 8080 &
 echo "[sh] Started nitriding."
 
 # in the background, try to ping the server once every 5 seconds for 6 times.

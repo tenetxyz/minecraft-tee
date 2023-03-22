@@ -15,7 +15,7 @@ create-instance:
 	aws ec2 run-instances \
 	--image-id ami-02238ac43d6385ab3 \
 	--count 1 \
-	--instance-type m5.xlarge \
+	--instance-type m5.2xlarge \
 	--key-name silver2 \
 	--enclave-options 'Enabled=true'
 

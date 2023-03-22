@@ -1,0 +1,3 @@
+[submodule "dockerize-mc-and-nitriding/dockerize-mc-and-nitriding/nitriding"]
+	path = dockerize-mc-and-nitriding/dockerize-mc-and-nitriding/nitriding
+	url = https://github.com/brave/nitriding

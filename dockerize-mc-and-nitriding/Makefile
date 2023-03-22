@@ -21,3 +21,6 @@ create-instance:
 
 setup-host:
 	sh setup-linux-host.sh
+
+validate-nitro-cli:
+	nitro-cli --version

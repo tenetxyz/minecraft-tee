@@ -2,6 +2,10 @@
 
 sudo yum install golang
 
+sudo yum install docker
+sudo systemctl enable docker
+sudo systemctl start docker
+
 git submodule update --init --recursive
 git pull --recurse-submodules
 
@@ -11,4 +15,3 @@ go get # install dependencies
 go build cmd/main.go
 
 # the output file is in this nitriding dir
-

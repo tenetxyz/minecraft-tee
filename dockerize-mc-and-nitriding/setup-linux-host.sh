@@ -1,8 +1,8 @@
 #/bin/sh
 
-sudo yum install golang
+sudo yum -y install golang
 
-sudo yum install docker
+sudo yum -y install docker
 sudo systemctl enable docker
 sudo systemctl start docker
 

@@ -4,6 +4,11 @@ build:
 run:
 	sudo docker run -it -p 25565:25565 mc-and-nitriding:latest
 
+# run this so the server can host enclaves
+start-enclave-service:
+	sudo systemctl start nitro-enclaves-allocator.service
+	sudo systemctl enable nitro-enclaves-allocator.service
+
 make-enclave:
 	nitro-cli build-enclave --docker-uri mc-and-nitriding:latest --output-file mc-and-nitriding.eif
 

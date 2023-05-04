@@ -25,10 +25,15 @@ start-gvproxy:
 
 forward-ports:
 	sudo curl \
-	--unix-socket /tmp/network.sock \
-	http:/unix/services/forwarder/expose `# yes it's http:/unix it looks sus but it's legit` \
-	-X POST \
-	-d '{"local":":443","remote":"192.168.127.2:443"}'
+		--unix-socket /tmp/network.sock \
+		http:/unix/services/forwarder/expose `# yes it's http:/unix it looks sus but it's legit` \
+		-X POST \
+		-d '{"local":":443","remote":"192.168.127.2:443"}'
+	sudo curl \
+		--unix-socket /tmp/network.sock \
+		http:/unix/services/forwarder/expose \
+		-X POST \
+		-d '{"local":":25565","remote":"192.168.127.2:25565"}'
 
 create-instance:
 # ami-02238ac43d6385ab3 is the amazon linux 2 ami for intel
@@ -43,5 +48,8 @@ create-instance:
 setup-host:
 	sh setup-linux-host.sh
 
-validate-nitro-cli:
+nitro-cli-version:
 	nitro-cli --version
+
+list-enclaves:
+	nitro-cli describe-enclaves

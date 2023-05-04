@@ -14,3 +14,7 @@
 - `make run-enclave`
 - `make start-gvproxy`
 - `make forward-ports` to forward specific ports to the vsock port, and thus to nitriding
+
+
+### Useful commands
+- `nitro-cli console --enclave-id <your-enclave-id>` To access the enclave

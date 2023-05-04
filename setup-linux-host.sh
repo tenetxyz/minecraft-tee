@@ -34,7 +34,7 @@ function build_nitriding_binary(){
 # needed to communicate with nitriding in the enclave
 function build_gvisor_binary(){
   echo "[SETUP] building gvisor binary"
-  cd "$workingdir/gvisor-tap-vsock" && make
+  cd "$workingdir/gvisor-tap-vsock" && make gvproxy
 }
 
 function install_nitro_cli(){

@@ -12,7 +12,7 @@ git pull --recurse-submodules
 # now build the nitriding code
 cd nitriding
 go get # install dependencies
-go build cmd/main.go # the output file is in this nitriding dir
+go build cmd/nitriding # the output file is in this nitriding dir
 
 # now install enclave code
 sudo amazon-linux-extras install aws-nitro-enclaves-cli -y

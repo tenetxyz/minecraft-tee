@@ -24,6 +24,7 @@ function pull_submodules(){
   git pull --recurse-submodules
 }
 
+# Note: we need to install golang before running this
 function build_nitriding_binary(){
   echo "[SETUP] building nitriding binary"
   cd "$workingdir/nitriding-daemon"
@@ -45,7 +46,7 @@ function install_nitro_cli(){
   sudo usermod -aG docker ec2-user
 }
 
-pull_submodules && build_nitriding_binary && build_gvisor_binary && install_docker && install_golang && install_nitro_cli || {
+install_golang && pull_submodules && build_nitriding_binary && build_gvisor_binary && install_docker && install_nitro_cli || {
   echo "[ERROR]: failed to complete setup"
   exit 1
 }

@@ -20,6 +20,16 @@ make-enclave:
 run-enclave:
 	sudo nitro-cli run-enclave --cpu-count 2 --memory 1288 --enclave-cid 16 --eif-path mc-and-nitriding.eif --debug-mode
 
+start-gvproxy:
+	sudo gvisor-tap-vsock/bin/gvproxy -listen vsock://:1024 -listen unix:///tmp/network.sock
+
+forward-ports:
+	sudo curl \
+	--unix-socket /tmp/network.sock \
+	http:/unix/services/forwarder/expose `# yes it's http:/unix it looks sus but it's legit` \
+	-X POST \
+	-d '{"local":":443","remote":"192.168.127.2:443"}'
+
 create-instance:
 # ami-02238ac43d6385ab3 is the amazon linux 2 ami for intel
 # ami-05502a22127df2492 is the amazon linux 2023 ami (not using cause missing core packages)

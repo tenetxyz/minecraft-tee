@@ -12,3 +12,5 @@
 - `make build` to build the dockerimage
 - `make make-enclave` to make the enclave image
 - `make run-enclave`
+- `make start-gvproxy`
+- `make forward-ports` to forward specific ports to the vsock port, and thus to nitriding

@@ -18,3 +18,8 @@
 
 ### Useful commands
 - `nitro-cli console --enclave-id <your-enclave-id>` To access the enclave
+
+
+### TODO
+- When productionizing this, make sure the enclave isn't in debug mode
+

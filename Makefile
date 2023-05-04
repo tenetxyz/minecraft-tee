@@ -9,11 +9,16 @@ start-enclave-service:
 	sudo systemctl start nitro-enclaves-allocator.service
 	sudo systemctl enable nitro-enclaves-allocator.service
 
+# run this if you change /etc/nitro_enclaves/allocator.yaml
+restart-enclave-service:
+	sudo systemctl stop nitro-enclaves-allocator.service
+	sudo systemctl start nitro-enclaves-allocator.service
+
 make-enclave:
-	nitro-cli build-enclave --docker-uri mc-and-nitriding:latest --output-file mc-and-nitriding.eif
+	sudo nitro-cli build-enclave --docker-uri mc-and-nitriding:latest --output-file mc-and-nitriding.eif
 
 run-enclave:
-	nitro-cli run-enclave --cpu-count 2 --memory 512 --enclave-cid 16 --eif-path mc-and-nitriding.eif --debug-mode
+	sudo nitro-cli run-enclave --cpu-count 2 --memory 1288 --enclave-cid 16 --eif-path mc-and-nitriding.eif --debug-mode
 
 create-instance:
 # ami-02238ac43d6385ab3 is the amazon linux 2 ami for intel

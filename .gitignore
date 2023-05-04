@@ -2,3 +2,6 @@
 *.DS_Store/
 *.swp
 silver2.pem
+
+# don't commit enclave files
+*.eif

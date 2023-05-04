@@ -9,10 +9,16 @@ sudo systemctl start docker
 git submodule update --init --recursive
 git pull --recurse-submodules
 
+# install golangci-lint for nitriding
+# binary will be $(go env GOPATH)/bin/golangci-lint
+curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(go env GOPATH)/bin 
+echo 'export PATH=$PATH:/home/ec2-user/go/bin' >> ~/.bashrc
+source ~/.bashrc
+
 # now build the nitriding code
-cd nitriding
+cd nitriding-daemon
 go get # install dependencies
-go build cmd/nitriding # the output file is in this nitriding dir
+make cmd/nitriding # the output file is in this nitriding dir
 
 # now install enclave code
 sudo amazon-linux-extras install aws-nitro-enclaves-cli -y

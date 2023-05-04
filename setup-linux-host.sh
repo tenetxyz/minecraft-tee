@@ -1,5 +1,6 @@
 #/bin/sh
 
+workingdir=$(pwd)
 function install_docker(){
   echo "[SETUP] installing docker"
   sudo yum -y install docker
@@ -17,14 +18,23 @@ function install_golang(){
   source ~/.bashrc
 }
 
-function build_nitriding_binary(){
-  echo "[SETUP] building nitriding binary"
+function pull_submodules(){
+  echo "[SETUP] pulling submodules"
   git submodule update --init --recursive
   git pull --recurse-submodules
+}
 
-  cd nitriding-daemon
+function build_nitriding_binary(){
+  echo "[SETUP] building nitriding binary"
+  cd "$workingdir/nitriding-daemon"
   go get # install dependencies
   make cmd/nitriding # the output file is in this nitriding dir
+}
+
+# needed to communicate with nitriding in the enclave
+function build_gvisor_binary(){
+  echo "[SETUP] building gvisor binary"
+  cd "$workingdir/gvisor-tap-vsock" && make
 }
 
 function install_nitro_cli(){
@@ -35,7 +45,7 @@ function install_nitro_cli(){
   sudo usermod -aG docker ec2-user
 }
 
-install_docker && install_golang && build_nitriding_binary && install_nitro_cli || {
+pull_submodules && build_nitriding_binary && build_gvisor_binary && install_docker && install_golang && install_nitro_cli || {
   echo "[ERROR]: failed to complete setup"
   exit 1
 }

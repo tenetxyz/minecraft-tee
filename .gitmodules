@@ -1,7 +1,6 @@
 [submodule "nitriding-daemon"]
 	path = nitriding-daemon
   url = https://github.com/brave/nitriding-daemon.git
-
-[submodule "gvisor-tap-sock"]
-	path = gvisor-tap-sock
-  url = https://github.com/containers/gvisor-tap-vsock.git
+[submodule "gvisor-tap-vsock"]
+	path = gvisor-tap-vsock
+	url = https://github.com/containers/gvisor-tap-vsock.git

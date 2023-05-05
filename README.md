@@ -18,7 +18,7 @@
 
 ### Useful commands
 - `nitro-cli console --enclave-id <your-enclave-id>` To access the enclave
-
+- `kill <enclaive pid>` since the nitro-cli terminate-enclave command sometimes fails
 
 ### TODO
 - When productionizing this, make sure the enclave isn't in debug mode

@@ -18,7 +18,7 @@ make-enclave:
 	sudo nitro-cli build-enclave --docker-uri mc-and-nitriding:latest --output-file mc-and-nitriding.eif
 
 run-enclave:
-	sudo nitro-cli run-enclave --cpu-count 2 --memory 1288 --enclave-cid 16 --eif-path mc-and-nitriding.eif --debug-mode
+	sudo nitro-cli run-enclave --cpu-count 2 --memory 1288 --enclave-cid 16 --eif-path mc-and-nitriding.eif --debug-mode --attach-console
 
 start-gvproxy:
 	sudo gvisor-tap-vsock/bin/gvproxy -listen vsock://:1024 -listen unix:///tmp/network.sock

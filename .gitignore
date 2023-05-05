@@ -3,5 +3,9 @@
 *.swp
 silver2.pem
 
+# don't commit kaniko-generated images
+*kaniko.tar
+
 # don't commit enclave files
 *.eif
+

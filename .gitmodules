@@ -4,3 +4,6 @@
 [submodule "gvisor-tap-vsock"]
 	path = gvisor-tap-vsock
 	url = https://github.com/containers/gvisor-tap-vsock.git
+[submodule "verify-enclave"]
+	path = verify-enclave
+	url = https://github.com/brave-experiments/verify-enclave.git

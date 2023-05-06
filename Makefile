@@ -4,6 +4,20 @@ image_tag := $(prog)
 image_tar := $(prog)-kaniko.tar
 image_eif := $(image_tar:%.tar=%.eif)
 
+.PHONY: build run start-enclave-service restart-enclave-service run-enclave start-gvproxy forward-ports create-instance setup-host list-enclaves
+
+
+# use kaniko to build the image
+# https://github.com/brave/star-randsrv/blob/main/Makefile
+build:
+	docker run -v $$PWD:/workspace gcr.io/kaniko-project/executor:v1.9.2 \
+		--context dir:///workspace/ \
+		--reproducible \
+		--no-push \
+		--tarPath $(image_tar) \
+		--destination $(image_tag) \
+		--custom-platform linux/amd64
+
 run:
 	sudo docker run -it -p 25565:25565 $(image_tag):latest
 
@@ -17,18 +31,8 @@ restart-enclave-service:
 	sudo systemctl stop nitro-enclaves-allocator.service
 	sudo systemctl start nitro-enclaves-allocator.service
 
-# use kaniko to build the image
-# https://github.com/brave/star-randsrv/blob/main/Makefile
-build:
-	docker run -v $$PWD:/workspace gcr.io/kaniko-project/executor:v1.9.2 \
-		--context dir:///workspace/ \
-		--reproducible \
-		--no-push \
-		--tarPath $(image_tar) \
-		--destination $(image_tag) \
-		--custom-platform linux/amd64
 
-enclave: $(image_tar)
+$(image_eif): $(image_tar)
 		docker load -i $<
 		nitro-cli build-enclave --docker-uri $(image_tag) --output-file $(image_eif)
 
@@ -63,9 +67,6 @@ create-instance:
 
 setup-host:
 	sh setup-linux-host.sh
-
-nitro-cli-version:
-	nitro-cli --version
 
 list-enclaves:
 	nitro-cli describe-enclaves

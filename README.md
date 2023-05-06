@@ -24,6 +24,7 @@
 Attestation basically means: "Making sure the Minecraft server is running in an enclave and that the enclave is running the code in this repo".
 Without attestation, the Minecraft server could be running untrusted code (i.e. your creations could be stolen)
 - `make create-instance` to make a new instance. This instance will perform the attestation
+- ssh into the linux host, create an ssh key, connect your key to github, then clone this repo
 - `./setup-linux-host.sh` to download nitriding, its dependencies, compile it and other linux essentials
 - `make start-enclave-service`. NOTE: I'm 80% sure this is needed (so the attestator can create an enclave). But I didn't test without this.
 - `make build` to build your own version of this repo (the code you want to make sure is running in the TEE)

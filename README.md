@@ -20,6 +20,18 @@
 - `nitro-cli console --enclave-id <your-enclave-id>` To access the enclave
 - `kill <enclaive pid>` since the nitro-cli terminate-enclave command sometimes fails
 
+### How to perform attestation
+Attestation basically means: "Making sure the Minecraft server is running in an enclave and that the enclave is running the code in this repo".
+Without attestation, the Minecraft server could be running untrusted code (i.e. your creations could be stolen)
+- `make create-instance` to make a new instance. This instance will perform the attestation
+- `./setup-linux-host.sh` to download nitriding, its dependencies, compile it and other linux essentials
+- `make start-enclave-service`. NOTE: I'm 80% sure this is needed (so the attestator can create an enclave). But I didn't test without this.
+- `make build` to build your own version of this repo (the code you want to make sure is running in the TEE)
+- `make make-enclave` to make the enclave image
+- `cd verify-enclave`
+- `make verify KANIKO_IMAGE_TAR=../mc-in-enclave-kaniko.tar IMAGE_TAG=mc-in-enclave ENCLAVE=<server_ip_of_the_mc_server_you_want_to_attest>:443/enclave/attestation`
+
+
 ### TODO
 - When productionizing this, make sure the enclave isn't in debug mode
 

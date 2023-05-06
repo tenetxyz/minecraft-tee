@@ -4,7 +4,7 @@ image_tag := $(prog)
 image_tar := $(prog)-kaniko.tar
 image_eif := $(image_tar:%.tar=%.eif)
 
-.PHONY: build run start-enclave-service restart-enclave-service run-enclave start-gvproxy forward-ports create-instance setup-host list-enclaves
+.PHONY: build run start-enclave-service restart-enclave-service make-enclave run-enclave start-gvproxy forward-ports create-instance setup-host list-enclaves
 
 
 # use kaniko to build the image
@@ -32,7 +32,7 @@ restart-enclave-service:
 	sudo systemctl start nitro-enclaves-allocator.service
 
 
-$(image_eif): $(image_tar)
+make-enclave: $(image_tar)
 		docker load -i $<
 		nitro-cli build-enclave --docker-uri $(image_tag) --output-file $(image_eif)
 

@@ -62,7 +62,7 @@ create-instance:
 	--count 1 \
 	--instance-type m5.xlarge `# NOTE: their documentation lies. enclaves are only available for m5.xlarge and larger. m5.large does not have enclave support` \
 	--key-name Transistor \
-	--block-device-mappings '[{"DeviceName":"/dev/sda1","Ebs":{"VolumeSize":32,"VolumeType":"gp2"}}]' `# configure the server with 32 Gb of storage` \
+	--block-device-mappings '[{"DeviceName":"/dev/xvda","Ebs":{"VolumeSize":32}}]' `# configure the server with 32 Gb of storage` \
 	--enclave-options 'Enabled=true'
 
 setup-host:
